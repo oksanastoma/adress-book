@@ -7,6 +7,7 @@ import Page.About as About
 import Page.Error as Error exposing (PageLoadError)
 import Page.Home as Home
 import Page.NotFound as NotFound
+import Page.User as User
 import Route exposing (..)
 import View.Page as Page exposing (ActivePage)
 import Util exposing ((=>))
@@ -26,6 +27,7 @@ type Page
     | Error PageLoadError
     | Home Home.Model
     | About About.Model
+    | User User.Model
 
 
 
@@ -36,6 +38,7 @@ type Msg
     = SetRoute (Maybe Route)
     | HomeMsg Home.Msg
     | AboutMsg About.Msg
+    | UserMsg User.Msg
 
 
 setRoute : Maybe Route -> Model -> ( Model, Cmd Msg )
@@ -50,6 +53,9 @@ setRoute route model =
 
         Just Route.About ->
             ( { model | page = About About.init }, Cmd.none )
+
+        Just Route.User ->
+            ( { model | page = User User.init }, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -78,6 +84,9 @@ updatePage page msg model =
 
             ( AboutMsg subMsg, About subModel ) ->
                 toPage About AboutMsg (About.update) subMsg subModel
+
+            ( UserMsg subMsg, User subModel ) ->
+                toPage User UserMsg (User.update) subMsg subModel
 
             ( _, NotFound ) ->
                 -- Disregard incoming messages when we're on the
@@ -122,6 +131,11 @@ view model =
                 About.view subModel
                     |> layout Page.About
                     |> Html.map AboutMsg
+
+            User subModel ->
+                User.view subModel
+                    |> layout Page.User
+                    |> Html.map UserMsg
 
 
 

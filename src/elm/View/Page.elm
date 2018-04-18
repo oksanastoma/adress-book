@@ -8,6 +8,7 @@ type ActivePage
     = Other
     | Home
     | About
+    | User
 
 
 {-| Take a page's Html and layout it with a header and footer.
@@ -31,6 +32,9 @@ viewHeader page =
             , text " | "
             , a [ Route.href Route.About ]
                 [ text "About" ]
+            , text " | "
+            , a [ Route.href Route.User ]
+                [ text "User" ]
             ]
         , hr [] []
         ]

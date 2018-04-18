@@ -12,6 +12,7 @@ import Navigation exposing (Location)
 type Route
     = Home
     | About
+    | User
 
 
 
@@ -24,6 +25,7 @@ routeMatcher =
     oneOf
         [ Url.map Home (s "")
         , Url.map About (s "about")
+        , Url.map User (s "user")
 
         --    When needing parameters on the form base/item/3
         --    , Url.map Item (s "item" </> string)
@@ -44,6 +46,9 @@ routeToString page =
 
                 About ->
                     [ "about" ]
+                
+                User ->
+                    ["user"]
 
         --    When needing parameters on the form base/item/3
         --                    Item id ->

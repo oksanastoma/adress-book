@@ -14,7 +14,7 @@ type alias Model =
 
 init : Model
 init =
-    Model "About" "This is the aboutpage"
+    Model "About" "This is the about page!!!!!!"
 
 
 
@@ -38,6 +38,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+
     div []
         [ h2 [] [ text model.pageTitle ]
         , div [] [ text model.pageBody ]
